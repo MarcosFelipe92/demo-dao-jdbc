@@ -1,5 +1,6 @@
 package application;
 
+import java.util.Date;
 import java.util.List;
 
 import model.dao.DaoFactory;
@@ -10,30 +11,29 @@ import model.entities.Seller;
 public class Program {
 
 	public static void main(String[] args) {	
-		SellerDao sellerDao = DaoFactory.createSellerDao();
+		SellerDao sellerDao = DaoFactory.createSellerDao();	
 		
-		System.out.println("=== TEST 1: Seller findById ===");
-		
-		Seller seller = sellerDao.findById(3);
-		
+		System.out.println("=== TEST 1: Seller findById ===");		
+		Seller seller = sellerDao.findById(3);		
 		System.out.println(seller);
 		
-		System.out.println("\n=== TEST 2: Seller findByDepartment ===");
-		
+		System.out.println("\n=== TEST 2: Seller findByDepartment ===");		
 		Department dep = new Department(2, "Eletronics");
-		List<Seller> list = sellerDao.findByDepartment(dep);
-		
+		List<Seller> list = sellerDao.findByDepartment(dep);	
 		for(Seller obj : list) {	
 			System.out.println(obj);
 		}
 		
 		System.out.println("\n=== TEST 3: Seller findAll ===");
-
-		list = sellerDao.findAll();
-		
+		list = sellerDao.findAll();		
 		for(Seller obj : list) {	
 			System.out.println(obj);
 		}
+		
+		System.out.println("\n=== TEST 4: Seller insert ===");		
+		Seller sellerAdd = new Seller(null, "Greg", "greg@gmail.com", new Date(), 4000.0, dep);		
+		sellerDao.insert(sellerAdd);		
+		System.out.println("Inserted! New id = " + sellerAdd.getId());
 	}
 
 }
